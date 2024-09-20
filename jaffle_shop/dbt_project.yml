@@ -1,0 +1,32 @@
+name: 'jaffle_shop'
+version: '1.0.0'
+
+profile: 'jaffle_shop'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_modules"
+    - "logs"
+
+seeds:
+  +docs:
+    node_color: '#cd7f32'
+
+models:
+  jaffle_shop:
+    intermediate:
+      schema: "intermediate"
+    staging:
+      schema: "staging"
+      +docs:
+        node_color: 'silver'
+    +docs:
+      node_color: 'gold'
+

@@ -1,0 +1,22 @@
+jaffle_shop:
+  outputs:
+    dev:
+      type: duckdb
+      catalog: unity
+      attach:
+        - path: unity
+          alias: unity
+          type: UC_CATALOG
+      extensions:
+        - name: delta
+        - name: uc_catalog
+          repository: http://nightly-extensions.duckdb.org
+      secrets:
+        - type: UC
+          token: 'not-used'
+          endpoint: 'http://uc:8080'
+          aws_region: 'eu-west-1'
+      plugins:
+        - module: unity
+  target: dev
+
