@@ -1,10 +1,6 @@
 ## Overview
-This repository contains materials for a blog post demonstrating the integration between Unity Catalog and DuckDB. The examples provided showcase how to use DuckDB with Unity Catalog for data management and querying.  
-Repository Structure
-Dockerfile.nginx: Dockerfile for setting up an NGINX server.
-notebooks/duckdb.ipynb: Jupyter notebook demonstrating SQL operations with DuckDB and Unity Catalog.
-notebooks/dbt.ipynb: Jupyter notebook demonstrating the use of dbt (data build tool) with DuckDB and Unity Catalog.
-requirements.txt: List of dependencies required for running the notebooks and examples.
+
+This repository contains materials for a blog post demonstrating the integration between Unity Catalog and DuckDB. The examples provided showcase how to use DuckDB with Unity Catalog
 
 ## Prerequisites
 - Docker
