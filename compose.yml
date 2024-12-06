@@ -5,16 +5,6 @@ services:
       - 8080:8080
     volumes:
       - shared-data:/app/unitycatalog
-  ucui:
-    container_name: ducklake-ucui
-    build:
-      dockerfile: Dockerfile.ucui
-      args:
-        UC_HOST: http://uc:8080
-    ports:
-      - 3000:3000
-    depends_on:
-      - uc
   jupyter:
     user: root
     build:
@@ -31,6 +21,8 @@ services:
       UC_TOKEN: 'not-used'
       UC_ENDPOINT: 'http://uc:8080'
       UC_AWS_REGION: 'eu-west-1'
+      JY_HOST_URL: http://localhost:8081
+      JY_DOCKER_HOST: http://uc:8080
     ports:
       - 8888:8888
     depends_on:
@@ -38,7 +30,6 @@ services:
     volumes:
       - shared-data:/app/unitycatalog
   nginx: # (reverse proxy) Enables service on localhost running outside docker compose network to access UC Catalog API
-    container_name: nginx
     build:
       dockerfile: Dockerfile.nginx
     ports:
