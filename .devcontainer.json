@@ -1,0 +1,162 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/go:1.23-bookworm",
+    "containerEnv": {
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+        "GITHUB_USER": "${localEnv:GITHUB_USER}"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12",
+            "toolsToInstall":"python-semantic-release,coverage,poetry,wheel,sqlfluff",
+            "installJupyterlab": "true"
+        },
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "23",
+            "installGradle": "true",
+            "installMaven": "true"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "moby": "false"
+        },
+        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+        "ghcr.io/devcontainers-contrib/features/argo-cd:1": {},
+        "ghcr.io/eitsupi/devcontainer-features/duckdb-cli:1": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
+        "ghcr.io/trunk-io/devcontainer-feature/trunk": {},
+        "ghcr.io/devcontainers/features/terraform:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "extensions.verifySignature": false,
+                "go.toolsManagement.checkForUpdates": "local",
+                "lldb.executable": "/usr/bin/lldb",
+                "files.autoSaveDelay": 5000,
+                "dbt.dbtPythonPathOverride": "/usr/local/python/current/bin/python",
+                "dbt.sqlFmtPath": ".trunk/tools",
+                "dbt.enableNewLineagePanel": true,
+                "keyboard.layout": "com.apple.keylayout.British",
+                "git.autofetch": true,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|:|^)\\s*($TAGS)|^//\\s*\\[x\\]|^//\\s*\\[ \\])",
+                "todo-tree.regex.enableMultiLine": true,
+                "todo-tree.general.tags": [
+                    "TODO",
+                    "[x]",
+                    "[ ]",
+                    "SEC",
+                    "FIX",
+                    "tfsec",
+                    "BUG",
+                    "HACK",
+                    "XXX",
+                    "NOTE",
+                    "trunk-ignore"
+                ],
+                "todo-tree.highlights.customHighlight": {
+                    "[x]": {
+                        "icon": "issue-closed",
+                        "foreground": "#64dd17",
+                        "background": "#008800"
+                    },
+                    "[ ]": {
+                        "icon": "issue-draft",
+                        "foreground": "#f44336",
+                        "background": "#592c2c"
+                    },
+                    "SEC": {
+                        "icon": "flame",
+                        "foreground": "#f44444",
+                        "background": "#5544c2"
+                    },
+                    "tfsec": {
+                        "icon": "flame",
+                        "foreground": "#f44444",
+                        "background": "#5544c2"
+                    },
+                    "trunk-ignore": {
+                        "icon": "flame",
+                        "foreground": "#f44444",
+                        "background": "#5544c2"
+                    },
+                    "FIX": {
+                        "icon": "flame",
+                        "foreground": "#f4b644",
+                        "background": "#c29a44"
+                    },
+                    "TODO": {
+                        "icon": "check",
+                        "foreground": "#44f4e5",
+                        "background": "#4457c2"
+                    },
+                    "BUG": {
+                        "icon": "bug"
+                    },
+                    "HACK": {
+                        "icon": "tools"
+                    },
+                    "XXX": {
+                        "icon": "x"
+                    },
+                    "NOTE": {
+                        "icon": "note",
+                        "foreground": "#53f444",
+                        "background": "#022c1c"
+                    }
+                }
+            },
+            "extensions": [
+                "AmazonWebServices.aws-toolkit-vscode",
+                "bierner.github-markdown-preview",
+                "charliermarsh.ruff",
+                "boto3typed.boto3-ide",
+                "davidanson.vscode-markdownlint",
+                "donjayamanne.python-environment-manager",
+                "dorzey.vscode-sqlfluff",
+                "eamodio.gitlens",
+                "GitHub.codespaces",
+                "github.copilot",
+                "github.copilot-chat",
+                "github.vscode-github-actions",
+                "GitHub.vscode-pull-request-github",
+                "golang.go",
+                "gruntfuggly.todo-tree",
+                "HashiCorp.terraform",
+                "innoverio.vscode-dbt-power-user",
+                "mark-tucker.aws-cli-configure",
+                "mechatroner.rainbow-csv",
+                "ms-azuretools.vscode-azureterraform",
+                "ms-azuretools.vscode-docker",
+                "ms-dotnettools.dotnet-interactive-vscode",
+                "ms-toolsai.datawrangler",
+                "mtxr.sqltools",
+                "njpwerner.autodocstring",
+                "RandomFractalsInc.vscode-data-preview",
+                "RandomFractalsInc.duckdb-sql-tools",
+                "RandomFractalsInc.tabular-data-viewer",
+                "trunk.io",
+                "wholroyd.jinja",
+                "tomaszbartoszewski.avro-tools",
+                "georgeshaidar.vsc-benthos"
+            ]
+        },
+        "codespaces": {
+            "repositories": {
+                "pixie79/devcontainer": {
+                    "permissions": "read-all"
+                },
+                "pixie79/other-repo": {
+                    "permissions": "write-all"
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,27 @@
 services:
   uc:
-    image: godatadriven/unity-catalog
+    build:
+      dockerfile: Dockerfile.uc
+      args:
+        UC_VERSION: 0.2.1
+        ALPINE_VERSION: "3.20"
     ports:
       - 8080:8080
     volumes:
       - shared-data:/app/unitycatalog
+
+  uc-ui:
+    build:
+      dockerfile: Dockerfile.ucui
+      args:
+        UC_HOST: http://uc:8080
+        UC_VERSION: 0.2.1
+        ALPINE_VERSION: "3.20"
+    ports:
+      - 3000:3000
+    depends_on:
+      - uc
+
   jupyter:
     user: root
     build:
@@ -18,9 +35,9 @@ services:
       CHOWN_HOME: 'yes'
       CHOWN_HOME_OPTS: -R
       LOCATION_PREFIX: /home/ducklake/data
-      UC_TOKEN: 'not-used'
-      UC_ENDPOINT: 'http://uc:8080'
-      UC_AWS_REGION: 'eu-west-1'
+      UC_TOKEN: not-used
+      UC_ENDPOINT: http://uc:8080
+      UC_AWS_REGION: eu-west-1
       JY_HOST_URL: http://localhost:8081
       JY_DOCKER_HOST: http://uc:8080
     ports:
@@ -29,11 +46,12 @@ services:
       - uc
     volumes:
       - shared-data:/app/unitycatalog
+
   nginx: # (reverse proxy) Enables service on localhost running outside docker compose network to access UC Catalog API
     build:
       dockerfile: Dockerfile.nginx
     ports:
-      - "8081:80"
+      - 8081:80
     depends_on:
       - uc
 volumes:

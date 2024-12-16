@@ -1,17 +1,21 @@
 # Use an official Node.js runtime as a parent image
-FROM node:18-alpine
+ARG ALPINE_VERSION="3.20"
+FROM node:alpine${ALPINE_VERSION}
 
-ARG UC_HOST
+ARG UC_HOST="http://localhost:8080"
+ARG UC_VERSION="0.2.1"
+ARG HOME="/app/unitycatalog"
 
 # Set the working directory
 WORKDIR /app
 
-RUN wget https://github.com/unitycatalog/unitycatalog-ui/archive/refs/heads/main.zip \
-    && unzip main.zip \
-    && mv unitycatalog-ui-main unitycatalog-ui \
-    && rm main.zip
 
-WORKDIR /app/unitycatalog-ui
+RUN wget https://github.com/unitycatalog/unitycatalog/archive/refs/tags/v${UC_VERSION}.zip \
+    && unzip v${UC_VERSION}.zip \
+    && mv unitycatalog-${UC_VERSION} unitycatalog \
+    && rm v${UC_VERSION}.zip
+
+WORKDIR /app/unitycatalog/ui/
 
 # Modify package.json to include the UC_HOST
 RUN sed -i "s|\"proxy\": \".*\"|\"proxy\": \"$UC_HOST\"|" package.json
